@@ -220,7 +220,7 @@ class LateXWorkshopPdfViewer implements ILatexWorkshopPdfViewer {
                 annotationEditorMode: -1,
                 disablePreferences: true,
                 enableScripting: false,
-                cMapUrl: '/cmaps/',
+                cMapUrl: 'cmaps/',
                 sidebarViewOnLoad: 0,
                 standardFontDataUrl: '/standard_fonts/',
                 workerPort,

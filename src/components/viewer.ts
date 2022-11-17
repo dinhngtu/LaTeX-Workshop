@@ -13,6 +13,7 @@ import { viewerManager } from './viewerlib/pdfviewermanager'
 import { ViewerPageLoaded } from './eventbus'
 import { getLogger } from './logger'
 import { moveActiveEditor } from '../utils/webview'
+import { myGetExternalUri } from '../main'
 
 const logger = getLogger('Viewer')
 
@@ -109,7 +110,7 @@ export class Viewer {
         lw.cacher.pdf.add(pdfFileUri.fsPath)
         try {
             logger.log(`Serving PDF file at ${url}`)
-            await vscode.env.openExternal(vscode.Uri.parse(url, true))
+            await vscode.env.openExternal(await myGetExternalUri(vscode.Uri.parse(url, true)))
             logger.log(`Open PDF viewer for ${pdfFileUri.toString(true)}`)
         } catch (e: unknown) {
             void vscode.window.showInputBox({

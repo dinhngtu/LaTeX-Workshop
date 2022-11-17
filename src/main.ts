@@ -16,6 +16,16 @@ import { DocumentChanged } from './components/eventbus'
 
 const logger = getLogger('Extension')
 
+export async function myGetExternalUri(sourceUri: vscode.Uri) {
+    const sourceOrigin = `${sourceUri.scheme}://${sourceUri.authority}`
+    const externalBase = await vscode.env.asExternalUri(vscode.Uri.parse(sourceOrigin, true))
+    return externalBase.with({
+        path: externalBase.path + sourceUri.path,
+        query: sourceUri.query,
+        fragment: sourceUri.fragment
+    })
+}
+
 export function activate(extensionContext: vscode.ExtensionContext) {
     void vscode.commands.executeCommand('setContext', 'latex-workshop:enabled', true)
 
